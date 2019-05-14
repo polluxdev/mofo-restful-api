@@ -17,4 +17,34 @@ use Illuminate\Http\Request;
 //     return $request->user();
 // });
 
-Route::get('genre', 'GenreController@index');
+Route::group(['prefix' => 'v1'], function(){
+
+    Route::resource('film', 'FilmController');
+
+    Route::resource('genre', 'GenreController',[
+        'only' => ['index', 'store']
+    ]);
+
+    Route::get('country', 'CountryController@index');
+    
+    Route::get('language', 'LanguageController@index');
+
+    Route::get('type', 'TypeController@index');
+
+    Route::resource('director', 'DirectorController',[
+        'only' => ['index', 'store']
+    ]);
+
+    Route::resource('star', 'StarController',[
+        'only' => ['index', 'store']
+    ]);
+
+    Route::resource('writer', 'WriterController',[
+        'only' => ['index', 'store']
+    ]);
+
+    Route::resource('production', 'ProductionController',[
+        'only' => ['index', 'store']
+    ]);
+
+});
